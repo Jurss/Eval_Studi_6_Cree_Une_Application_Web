@@ -10,6 +10,23 @@ class Agent
     private string $nationality;
     private int $idSpeciality;
 
+    public function insertDataAgent()
+    {
+        $pdo = new PDO('mysql:host=eu-cdbr-west-01.cleardb.com;dbname=heroku_fa8e42539ffae79', 'b94cf7196dd4fc', '85ca6d05');
+        $statement = $pdo->prepare('INSERT INTO agent(id, firstName, lastName, birth_date, identification_code, nationality, id_speciality) VALUES(UUID(), :firstName, :lastName, :birth_date, :identification_code, :nationality, :id_speciality)');
+        $statement->bindParam(':firstName', $this->firstName, PDO::PARAM_STR);
+        $statement->bindParam(':lastName', $this->lastName, PDO::PARAM_STR);
+        $statement->bindParam(':birth_date', $this->birthDate, PDO::PARAM_STR);
+        $statement->bindParam(':identification_code', $this->identificationCode, PDO::PARAM_INT);
+        $statement->bindParam(':nationality', $this->nationality, PDO::PARAM_STR);
+        $statement->bindParam(':id_speciality', $this->idSpeciality, PDO::PARAM_INT);
+        if($statement->execute() !== false){
+            return true;
+        }else {
+            return false ;
+        };
+    }
+
     /**
      * @return string
      */
