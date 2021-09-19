@@ -1,0 +1,17 @@
+<?php
+require_once 'ConnexBdd.php';
+$createDatabase = 'CREATE DATABASE IF NOT EXISTS heroku_fa8e42539ffae79';
+$createDatabaseTable = ['CREATE TABLE IF NOT EXISTS admin(id CHAR(36) NOT NULL PRIMARY KEY, firstName VARCHAR(100) NOT NULL, lastName VARCHAR(100) NOT NULL, mail VARCHAR(254) NOT NULL, password CHAR(60) NOT NULL, creation_date DATE NOT NULL);',
+                    'CREATE TABLE IF NOT EXISTS speciality(id INT(3) NOT NULL PRIMARY KEY AUTO_INCREMENT, name VARCHAR(50) NOT NULL);',
+                    'CREATE TABLE IF NOT EXISTS agent(id CHAR(36) NOT NULL PRIMARY KEY, firstName VARCHAR(100) NOT NULL, lastName VARCHAR(100) NOT NULL, birth_date DATE NOT NULL, identification_code INT(6) NOT NULL, nationality VARCHAR(50) NOT NULL, id_speciality INT(3) NOT NULL, FOREIGN KEY (id_speciality) REFERENCES speciality(id));',
+                    'CREATE TABLE IF NOT EXISTS target(id CHAR(36) NOT NULL PRIMARY KEY, firstName VARCHAR(100) NOT NULL, lastName VARCHAR(100) NOT NULL, birth_date DATE NOT NULL, code_name VARCHAR(100) NOT NULL, nationality VARCHAR(100) NOT NULL);',
+                    'CREATE TABLE IF NOT EXISTS contact(id CHAR(36) NOT NULL PRIMARY KEY, fistName VARCHAR(100) NOT NULL, lastName VARCHAR(100) NOT NULL, birth_date DATE NOT NULL, code_name VARCHAR(100) NOT NULL, nationality VARCHAR(100) NOT NULL);',
+                    'CREATE TABLE IF NOT EXISTS safe_house(id CHAR(36) NOT NULL PRIMARY KEY, code VARCHAR(50) NOT NULL, adrress VARCHAR(100) NOT NULL, country VARCHAR(100) NOT NULL, type VARCHAR(30) NOT NULL);',
+                    'CREATE TABLE IF NOT EXISTS mission(id CHAR(36) NOT NULL PRIMARY KEY, title VARCHAR(30) NOT NULL, description TEXT NOT NULL, code_name VARCHAR(100) NOT NULL, country VARCHAR(100) NOT NULL, type_assignment VARCHAR(30) NOT NULL, status VARCHAR (14) NOT NULL, id_require_speciality INT(3) NOT NULL, start_date DATE NOT NULL, end_date DATE NOT NULL, FOREIGN KEY (id_require_speciality) REFERENCES speciality(id));',
+                    'CREATE TABLE IF NOT EXISTS assign_agent_to_mission (id INT(11) NOT NULL PRIMARY KEY AUTO_INCREMENT, id_mission CHAR(36) NOT NULL, id_agent CHAR(36) NOT NULL, FOREIGN KEY(id_mission) REFERENCES mission(id), FOREIGN KEY (id_agent) REFERENCES agent(id));',
+                    'CREATE TABLE IF NOT EXISTS assign_contact_to_mission(id INT(11) NOT NULL PRIMARY KEY AUTO_INCREMENT, id_mission CHAR(36) NOT NULL, id_contact CHAR(36) NOT NULL, FOREIGN KEY (id_mission) REFERENCES mission(id), FOREIGN KEY (id_contact) REFERENCES contact(id));',
+                    'CREATE TABLE IF NOT EXISTS assign_target_to_mission (id INT(11) NOT NULL PRIMARY KEY AUTO_INCREMENT, id_mission CHAR(36) NOT NULL, id_target CHAR(36) NOT NULL, FOREIGN KEY (id_mission) REFERENCES mission(id), FOREIGN KEY (id_target) REFERENCES target(id));',
+                    'CREATE TABLE IF NOT EXISTS assign_safe_house_to_mission (id INT(11) NOT NULL PRIMARY KEY AUTO_INCREMENT, id_mission CHAR(36) NOT NULL, id_safe_house CHAR(36), FOREIGN KEY (id_mission) REFERENCES mission(id), FOREIGN KEY (id_safe_house) REFERENCES safe_house(id));'];
+
+$createRequest = new ConnexBdd();
+$createRequest = createDatabase($createDatabase, $createDatabaseTable);
