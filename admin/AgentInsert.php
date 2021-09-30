@@ -37,18 +37,18 @@ if(!empty($_POST) && !empty($_POST['firstName']) && !empty($_POST['lastName']) &
                             header('Location: admin.php');
                             exit();
                         }
-                    }
-                }else{
+                    }else{
                     $_SESSION['flash']['danger'] = "identification_code is inccorect";
                 }
-            }else{
+                }else{
                 $_SESSION['flash']['danger'] = "birth_date is inccorect";
             }
-        }else{
+            }else{
             $_SESSION['flash']['danger'] = "lastName is inccorect";
         }
-    }else{
+        }else{
         $_SESSION['flash']['danger'] = "firstName is inccorect";
+    }
 }
 ?>
 <div class="back">
