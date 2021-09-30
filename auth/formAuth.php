@@ -24,6 +24,10 @@ if(!empty($_POST) && !empty($_POST['mail']) && !empty($_POST['password'])) {
 }
 include '../inc/header.php';
 ?>
+    <div class="back">
+        <a href="../index.php" class="btn btn-success">Back</a>
+    </div>
+
     <?php if(!empty($errors)): ?>
     <div class="alert alert-danger">
         <p>Access denied:</p>
