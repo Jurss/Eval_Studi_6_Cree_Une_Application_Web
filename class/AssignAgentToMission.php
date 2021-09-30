@@ -3,7 +3,7 @@
 class AssignAgentToMission
 {
     private int $id;
-    private string $isMission;
+    private string $idMission;
     private string $idAgent;
 
     public function insertDataAssignAgent(){
@@ -26,19 +26,27 @@ class AssignAgentToMission
     }
 
     /**
-     * @return string
+     * @param int $id
      */
-    public function getIsMission(): string
+    public function setId(int $id): void
     {
-        return $this->isMission;
+        $this->id = $id;
     }
 
     /**
-     * @param string $isMission
+     * @return string
      */
-    public function setIsMission(string $isMission): void
+    public function getIdMission(): string
     {
-        $this->isMission = $isMission;
+        return $this->idMission;
+    }
+
+    /**
+     * @param string $idMission
+     */
+    public function setIdMission(string $idMission): void
+    {
+        $this->idMission = $idMission;
     }
 
     /**

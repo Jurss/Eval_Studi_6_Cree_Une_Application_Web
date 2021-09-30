@@ -31,27 +31,29 @@ include '../inc/header.php';
     </div>
     <?php endif; ?>
 
-    <form method="post" class="form-horizontal form-style">
-        <fieldset>
-            <div class="form-group">
-                <label for="mail" class="col-lg-2 control-label">Email</label>
-                <div class="col-lg-10">
-                    <input type="text" name="mail" id="mail" required>
+    <div class="jumbotron">
+        <form method="post" class="form-horizontal form-style">
+            <fieldset>
+                <div class="form-group">
+                    <label for="mail" class="col-lg-2 control-label">Email</label>
+                    <div class="col-lg-10">
+                        <input type="text" name="mail" id="mail" required>
+                    </div>
                 </div>
-            </div>
-            <div class="form-group">
-                <label for="password" class="col-lg-2 control-label">Password</label>
-                <div class="col-lg-10">
-                    <input type="password" name="password" id="password" required>
+                <div class="form-group">
+                    <label for="password" class="col-lg-2 control-label">Password</label>
+                    <div class="col-lg-10">
+                        <input type="password" name="password" id="password" required>
+                    </div>
                 </div>
-            </div>
-            <div class="form-group">
-                <div class="col-lg-10 col-lg-offset-2">
-                    <button type="submit" class="btn btn-primary">Sign up</button>
+                <div class="form-group">
+                    <div class="col-lg-10 col-lg-offset-2">
+                        <button type="submit" class="btn btn-primary">Sign up</button>
+                    </div>
                 </div>
-            </div>
-        </fieldset>
-    </form>
+            </fieldset>
+        </form>
+    </div>
 <?php
 include '../inc/footer.php';
 

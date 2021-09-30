@@ -1,6 +1,4 @@
 <?php
-session_start();
-
 include "../inc/header.php";
-?>
-
+include "home.php";
+include "../inc/footer.php";

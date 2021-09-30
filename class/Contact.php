@@ -11,7 +11,7 @@ class Contact
 
     public function insertDataContact(){
         $pdo = new PDO('mysql:host=eu-cdbr-west-01.cleardb.com;dbname=heroku_fa8e42539ffae79', 'b94cf7196dd4fc', '85ca6d05');
-        $statement = $pdo->prepare('INSERT INTO target VALUES (UUID(), :firstName, :lastName, :birth_date, :code_name, :nationality)');
+        $statement = $pdo->prepare('INSERT INTO contact VALUES (UUID(), :firstName, :lastName, :birth_date, :code_name, :nationality)');
         $statement->bindParam(':firstName', $this->firstName, PDO::PARAM_STR);
         $statement->bindParam(':lastName', $this->lastName, PDO::PARAM_STR);
         $statement->bindParam(':birth_date', $this->birthDate, PDO::PARAM_STR);
@@ -21,7 +21,7 @@ class Contact
             return true;
         }else {
             return false ;
-        };
+        }
     }
 
     /**

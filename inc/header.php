@@ -11,6 +11,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="../css/app.css">
     <link rel="stylesheet" href="../css/index.css">
+    <link rel="stylesheet" href="../css/insertData.css">
     <title>Secret agent management</title>
 </head>
 <body>
@@ -24,13 +25,15 @@
             <a href="auth/formAuth.php" class="btn btn-info">Sign up</a>
         <?php endif; ?>
     </div>
-    <?php if(isset($_SESSION['flash'])):  ?>
-    <?php foreach ($_SESSION['flash'] as $type => $message): ?>
-        <div class="alert alert-<?php echo $type; ?>">
-            <?php echo $message; ?>
-        </div>
-    <?php endforeach; ?>
-    <?php endif; ?>
-    <?php unset($_SESSION['flash']); ?>
+    <div id="remove-alert" onclick="setTimeout(function () {document.getElementById('remove-alert').style.display='none'}, 1); return false">
+        <?php if(isset($_SESSION['flash'])):  ?>
+        <?php foreach ($_SESSION['flash'] as $type => $message): ?>
+            <div class="alert alert-<?php echo $type; ?>">
+                <?php echo $message; ?>
+            </div>
+        <?php endforeach; ?>
+        <?php endif; ?>
+        <?php unset($_SESSION['flash']); ?>
+    </div>
 </header>
 

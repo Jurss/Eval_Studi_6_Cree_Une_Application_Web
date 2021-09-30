@@ -3,7 +3,7 @@
 class AssignSafeHouseToMission
 {
     private int $id;
-    private string $isMission;
+    private string $idMission;
     private string $idSafeHouse;
 
     public function insertDataAssignSafeHouse(){
@@ -29,17 +29,17 @@ class AssignSafeHouseToMission
     /**
      * @return string
      */
-    public function getIsMission(): string
+    public function getIdMission(): string
     {
-        return $this->isMission;
+        return $this->idMission;
     }
 
     /**
-     * @param string $isMission
+     * @param string $idMission
      */
-    public function setIsMission(string $isMission): void
+    public function setIdMission(string $idMission): void
     {
-        $this->isMission = $isMission;
+        $this->idMission = $idMission;
     }
 
     /**

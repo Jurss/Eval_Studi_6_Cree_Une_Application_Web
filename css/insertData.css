@@ -1,0 +1,13 @@
+#formInsertData{
+    margin-left: 5%;
+    padding: 15px;
+    border-radius: 18px;
+    width: 33%;
+}
+.inputInsertData{
+    margin-left: 55px;
+    max-width: 250px;
+}
+.SendTableName{
+    display: none;
+}

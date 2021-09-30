@@ -21,7 +21,20 @@ class Admin
             return true;
         }else {
             return false ;
-        };
+        }
+    }
+    public function UpdateData(array $req){
+        $pdo = new PDO('mysql:host=eu-cdbr-west-01.cleardb.com;dbname=heroku_fa8e42539ffae79', 'b94cf7196dd4fc', '85ca6d05');
+        $statement = $pdo->prepare('UPDATE admin SET :colName = :colValue WHERE id = :requestValue');
+        $statement->bindParam(':colName', $req['colName'], PDO::PARAM_STR);
+        $statement->bindParam(':colValue', $req['colValue'], PDO::PARAM_STR);
+        $statement->bindParam(':requestValue', $req['requestValue'], PDO::PARAM_STR);
+
+        if($statement->execute() !== false){
+            return true;
+        }else {
+            return false ;
+        }
     }
 
     /**
@@ -104,19 +117,4 @@ class Admin
         $this->password = $password;
     }
 
-    /**
-     * @return mixed
-     */
-    public function getCreationDate()
-    {
-        return $this->creationDate;
-    }
-
-    /**
-     * @param mixed $creationDate
-     */
-    public function setCreationDate($creationDate): void
-    {
-        $this->creationDate = $creationDate;
-    }
 }

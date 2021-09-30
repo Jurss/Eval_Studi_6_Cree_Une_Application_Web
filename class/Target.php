@@ -9,6 +9,21 @@ class Target
     private string $codeName;
     private string $nationality;
 
+    public function update($table, $id, $colName,$colValue){
+
+        $pdo = new PDO('mysql:host=eu-cdbr-west-01.cleardb.com;dbname=heroku_fa8e42539ffae79', 'b94cf7196dd4fc', '85ca6d05');
+        $statement = $pdo->prepare("UPDATE Target SET lastName = :colValue WHERE id = :id");
+        $statement->bindParam(':colName', $colName, PDO::PARAM_STR);
+        $statement->bindParam(':colValue', $colValue, PDO::PARAM_STR);
+        $statement->bindParam(':id', $id, PDO::PARAM_STR);
+
+        if($statement->execute() !== false){
+            return true;
+        }else {
+            return false ;
+        }
+    }
+
     public function insertDataTarget(){
         $pdo = new PDO('mysql:host=eu-cdbr-west-01.cleardb.com;dbname=heroku_fa8e42539ffae79', 'b94cf7196dd4fc', '85ca6d05');
         $statement = $pdo->prepare('INSERT INTO target VALUES (UUID(), :firstName, :lastName, :birth_date, :code_name, :nationality)');
@@ -21,47 +36,14 @@ class Target
             return true;
         }else {
             return false ;
-        };
+        }
     }
-
-    /**
-     * @return string
-     */
-    public function getId(): string
-    {
-        return $this->id;
-    }
-
-    /**
-     * @param string $id
-     */
-    public function setId(string $id): void
-    {
-        $this->id = $id;
-    }
-
-    /**
-     * @return string
-     */
-    public function getFirstName(): string
-    {
-        return $this->firstName;
-    }
-
     /**
      * @param string $firstName
      */
     public function setFirstName(string $firstName): void
     {
         $this->firstName = $firstName;
-    }
-
-    /**
-     * @return string
-     */
-    public function getLastName(): string
-    {
-        return $this->lastName;
     }
 
     /**
@@ -75,25 +57,10 @@ class Target
     /**
      * @return mixed
      */
-    public function getBirthDate()
-    {
-        return $this->birthDate;
-    }
 
-    /**
-     * @param mixed $birthDate
-     */
     public function setBirthDate($birthDate): void
     {
         $this->birthDate = $birthDate;
-    }
-
-    /**
-     * @return string
-     */
-    public function getCodeName(): string
-    {
-        return $this->codeName;
     }
 
     /**
@@ -102,14 +69,6 @@ class Target
     public function setCodeName(string $codeName): void
     {
         $this->codeName = $codeName;
-    }
-
-    /**
-     * @return string
-     */
-    public function getNationality(): string
-    {
-        return $this->nationality;
     }
 
     /**

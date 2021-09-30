@@ -3,19 +3,19 @@
 class AssignTargetToMission
 {
     private int $id;
-    private string $isMission;
+    private string $idMission;
     private string $idTarget;
 
     public function insertDataAssignTarget(){
         $pdo = new PDO('mysql:host=eu-cdbr-west-01.cleardb.com;dbname=heroku_fa8e42539ffae79', 'b94cf7196dd4fc', '85ca6d05');
         $statement = $pdo->prepare('INSERT INTO assign_target_to_mission(id_mission, id_target) VALUES (:id_mission, :id_target)');
-        $statement->bindParam(':id_mission', $this->isMission, PDO::PARAM_STR);
+        $statement->bindParam(':id_mission', $this->idMission, PDO::PARAM_STR);
         $statement->bindParam(':id_target', $this->idTarget, PDO::PARAM_STR);
         if($statement->execute() !== false){
             return true;
         }else {
             return false ;
-        };
+        }
     }
     /**
      * @return int
@@ -28,17 +28,17 @@ class AssignTargetToMission
     /**
      * @return string
      */
-    public function getIsMission(): string
+    public function getIdMission(): string
     {
-        return $this->isMission;
+        return $this->idMission;
     }
 
     /**
-     * @param string $isMission
+     * @param string $idMission
      */
-    public function setIsMission(string $isMission): void
+    public function setIdMission(string $idMission): void
     {
-        $this->isMission = $isMission;
+        $this->idMission = $idMission;
     }
 
     /**
