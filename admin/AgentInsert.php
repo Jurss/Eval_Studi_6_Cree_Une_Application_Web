@@ -1,6 +1,7 @@
 <?php
 include "../inc/function.php";
 include '../inc/header.php';
+require_once "../inc/countriesList.php";
 logged_only();
 
 require_once '../class/ListingData.php';
@@ -19,7 +20,6 @@ if(!empty($_POST) && !empty($_POST['firstName']) && !empty($_POST['lastName']) &
         if (preg_match("/^([a-zA-Z' ]+)$/", $_POST['lastName'])) {
             if (isValidDate($_POST['birth_date']) === true){
                 if (preg_match("/^[0-9]*$/", $_POST['identification_code'])) {
-                    if (preg_match("/^([a-zA-Z' ]+)$/", $_POST['nationality'])) {
                         $dataS->setFirstName($_POST['firstName']);
                         $dataS->setLastName($_POST['lastName']);
                         $dataS->setBirthDate($_POST['birth_date']);
@@ -37,8 +37,6 @@ if(!empty($_POST) && !empty($_POST['firstName']) && !empty($_POST['lastName']) &
                             header('Location: admin.php');
                             exit();
                         }
-                    } else {
-                        $_SESSION['flash']['danger'] = "Nationality is inccorect";
                     }
                 }else{
                     $_SESSION['flash']['danger'] = "identification_code is inccorect";
@@ -51,7 +49,6 @@ if(!empty($_POST) && !empty($_POST['firstName']) && !empty($_POST['lastName']) &
         }
     }else{
         $_SESSION['flash']['danger'] = "firstName is inccorect";
-    }
 }
 ?>
 <div class="back">
@@ -89,7 +86,13 @@ if(!empty($_POST) && !empty($_POST['firstName']) && !empty($_POST['lastName']) &
 
                         <?php } ?>
                         </select>
-                        <?php else: ?>
+                        <?php elseif($col['Field'] == 'nationality'): ?>
+                            <select class="inputInsertData form-control" name="<?php echo $col['Field'] ?>" id="<?php echo $col['Field'] ?>">
+                                <?php foreach ($countries_list as $key => $value): ?>
+                                    <option><?php echo $value ?></option>
+                                <?php endforeach;?>
+                            </select>
+                                <?php else: ?>
                             <input type="text" class="inputInsertData form-control" name="<?php echo $col['Field'] ?>" id="<?php echo $col['Field'] ?>" required>
                         <?php endif; ?>
                     </div>

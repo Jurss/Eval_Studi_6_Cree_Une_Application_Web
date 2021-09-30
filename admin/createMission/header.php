@@ -22,7 +22,7 @@
     <div class="navbar navbar-default">
         <h1>Secret Agent mamangement</h1>
         <?php if(isset($_SESSION['auth'])): ?>
-            <a href="../auth/logout.php" class="btn btn-danger">Log Out</a>
+            <a href="../../auth/logout.php" class="btn btn-danger">Log Out</a>
         <?php else: ?>
             <a href="auth/formAuth.php" class="btn btn-info">Sign up</a>
         <?php endif; ?>

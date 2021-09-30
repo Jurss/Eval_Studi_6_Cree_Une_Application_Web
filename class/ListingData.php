@@ -44,7 +44,6 @@ class ListingData
         $statement->bindParam(':code', $code, PDO::PARAM_STR);
         if($statement->execute()){
             $rows = $statement->fetch();
-            var_dump($rows);
             return $rows;
         }
     }

@@ -1,6 +1,7 @@
 <?php
 include "../inc/function.php";
 logged_only();
+
 ?>
 
 <div class="jumbotron container1">
