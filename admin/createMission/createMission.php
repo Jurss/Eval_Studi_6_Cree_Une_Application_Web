@@ -81,7 +81,6 @@ if (!empty($_POST) && !empty($_POST['title']) && !empty($_POST['description']) &
                                 $agentId = $req->getForeignKeyFullName('agent', $agentSepareName[0], $agentSepareName[1]);
                                 $targetId = $req->getForeignKeyFullName('target', $TargetSepareName[0], $TargetSepareName[1]);
                                 $contactId = $req->getForeignKeyFullName('contact', $ContactSepareName[0], $ContactSepareName[1]);
-                                echo $_POST['assign_safe_house'];
                                 if($_POST['assign_safe_house'] !== 'None')
                                 {
                                     $safeHouseName = separeSafeHouse($_POST['assign_safe_house']);
