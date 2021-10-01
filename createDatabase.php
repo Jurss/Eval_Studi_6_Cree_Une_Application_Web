@@ -1,5 +1,5 @@
 <?php
-require_once 'ConnexBdd.php';
+require_once 'class/ConnexBdd.php';
 $createDatabase = 'CREATE DATABASE IF NOT EXISTS heroku_fa8e42539ffae79';
 $createDatabaseTable = ['CREATE TABLE IF NOT EXISTS admin(id CHAR(36) NOT NULL PRIMARY KEY, firstName VARCHAR(100) NOT NULL, lastName VARCHAR(100) NOT NULL, mail VARCHAR(254) NOT NULL, password CHAR(60) NOT NULL, creation_date DATE NOT NULL);',
                     'CREATE TABLE IF NOT EXISTS speciality(id INT(3) NOT NULL PRIMARY KEY AUTO_INCREMENT, name VARCHAR(50) NOT NULL);',
@@ -14,4 +14,4 @@ $createDatabaseTable = ['CREATE TABLE IF NOT EXISTS admin(id CHAR(36) NOT NULL P
                     'CREATE TABLE IF NOT EXISTS assign_safe_house_to_mission (id INT(11) NOT NULL PRIMARY KEY AUTO_INCREMENT, id_mission CHAR(36) NOT NULL, id_safe_house CHAR(36), FOREIGN KEY (id_mission) REFERENCES mission(id), FOREIGN KEY (id_safe_house) REFERENCES safe_house(id));'];
 
 $createRequest = new ConnexBdd();
-$createRequest = createDatabase($createDatabase, $createDatabaseTable);
+$createRequest->createDatabase($createDatabase, $createDatabaseTable);

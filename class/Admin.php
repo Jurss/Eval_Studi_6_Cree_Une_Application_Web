@@ -10,30 +10,40 @@ class Admin
     private $creationDate;
 
     public function insertDataAdmin(){
-        $pdo = new PDO('mysql:host=eu-cdbr-west-01.cleardb.com;dbname=heroku_fa8e42539ffae79', 'b94cf7196dd4fc', '85ca6d05');
-        $statement = $pdo->prepare('INSERT INTO admin(id, firstName, lastName, mail, password, creation_date) VALUES (UUID(), :firstName, :lastName, :mail, :password, :creation_date)');
-        $statement->bindParam(':firstName', $this->firstName, PDO::PARAM_STR);
-        $statement->bindParam(':lastName', $this->lastName, PDO::PARAM_STR);
-        $statement->bindParam(':mail', $this->mail, PDO::PARAM_STR);
-        $statement->bindValue(':password', password_hash($this->password, PASSWORD_BCRYPT), PDO::PARAM_STR);
-        $statement->bindValue(':creation_date', date('Y-m-d'), PDO::PARAM_STR);
-        if($statement->execute() !== false){
-            return true;
-        }else {
-            return false ;
+        try{
+            $pdo = new PDO('mysql:host=eu-cdbr-west-01.cleardb.com;dbname=heroku_fa8e42539ffae79', 'b94cf7196dd4fc', '85ca6d05');
+            $statement = $pdo->prepare('INSERT INTO admin(id, firstName, lastName, mail, password, creation_date) VALUES (UUID(), :firstName, :lastName, :mail, :password, :creation_date)');
+            $statement->bindParam(':firstName', $this->firstName, PDO::PARAM_STR);
+            $statement->bindParam(':lastName', $this->lastName, PDO::PARAM_STR);
+            $statement->bindParam(':mail', $this->mail, PDO::PARAM_STR);
+            $statement->bindValue(':password', password_hash($this->password, PASSWORD_BCRYPT), PDO::PARAM_STR);
+            $statement->bindValue(':creation_date', date('Y-m-d'), PDO::PARAM_STR);
+            if($statement->execute() !== false){
+                return true;
+            }else {
+                return false ;
+            }
+        } catch (PDOException $e){
+            echo 'echec de la connexion';
+            file_put_contents('../dblogs.txt', $e->getMessage().PHP_EOL, FILE_APPEND);
         }
     }
     public function UpdateData(array $req){
-        $pdo = new PDO('mysql:host=eu-cdbr-west-01.cleardb.com;dbname=heroku_fa8e42539ffae79', 'b94cf7196dd4fc', '85ca6d05');
-        $statement = $pdo->prepare('UPDATE admin SET :colName = :colValue WHERE id = :requestValue');
-        $statement->bindParam(':colName', $req['colName'], PDO::PARAM_STR);
-        $statement->bindParam(':colValue', $req['colValue'], PDO::PARAM_STR);
-        $statement->bindParam(':requestValue', $req['requestValue'], PDO::PARAM_STR);
+        try{
+            $pdo = new PDO('mysql:host=eu-cdbr-west-01.cleardb.com;dbname=heroku_fa8e42539ffae79', 'b94cf7196dd4fc', '85ca6d05');
+            $statement = $pdo->prepare('UPDATE admin SET :colName = :colValue WHERE id = :requestValue');
+            $statement->bindParam(':colName', $req['colName'], PDO::PARAM_STR);
+            $statement->bindParam(':colValue', $req['colValue'], PDO::PARAM_STR);
+            $statement->bindParam(':requestValue', $req['requestValue'], PDO::PARAM_STR);
 
-        if($statement->execute() !== false){
-            return true;
-        }else {
-            return false ;
+            if($statement->execute() !== false){
+                return true;
+            }else {
+                return false ;
+            }
+        } catch (PDOException $e){
+            echo 'echec de la connexion';
+            file_put_contents('../dblogs.txt', $e->getMessage().PHP_EOL, FILE_APPEND);
         }
     }
 

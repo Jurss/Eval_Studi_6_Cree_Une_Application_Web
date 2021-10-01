@@ -9,16 +9,21 @@ class SafeHouse
     private string $type;
 
     public function insertDataSafeHouse(){
-        $pdo = new PDO('mysql:host=eu-cdbr-west-01.cleardb.com;dbname=heroku_fa8e42539ffae79', 'b94cf7196dd4fc', '85ca6d05');
-        $statement = $pdo->prepare('INSERT INTO safe_house VALUES (UUID(), :codeHouse, :addressHouse, :countryHouse, :typeHouse)');
-        $statement->bindParam(':codeHouse', $this->code, PDO::PARAM_STR);
-        $statement->bindParam(':addressHouse', $this->address, PDO::PARAM_STR);
-        $statement->bindParam(':countryHouse', $this->country, PDO::PARAM_STR);
-        $statement->bindParam(':typeHouse', $this->type, PDO::PARAM_STR);
-        if($statement->execute() !== false){
-            return true;
-        }else {
-            return false ;
+        try{
+            $pdo = new PDO('mysql:host=eu-cdbr-west-01.cleardb.com;dbname=heroku_fa8e42539ffae79', 'b94cf7196dd4fc', '85ca6d05');
+            $statement = $pdo->prepare('INSERT INTO safe_house VALUES (UUID(), :codeHouse, :addressHouse, :countryHouse, :typeHouse)');
+            $statement->bindParam(':codeHouse', $this->code, PDO::PARAM_STR);
+            $statement->bindParam(':addressHouse', $this->address, PDO::PARAM_STR);
+            $statement->bindParam(':countryHouse', $this->country, PDO::PARAM_STR);
+            $statement->bindParam(':typeHouse', $this->type, PDO::PARAM_STR);
+            if($statement->execute() !== false){
+                return true;
+            }else {
+                return false ;
+            }
+        } catch (PDOException $e){
+            echo 'echec de la connexion';
+            file_put_contents('../dblogs.txt', $e->getMessage().PHP_EOL, FILE_APPEND);
         }
     }
 
